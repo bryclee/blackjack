@@ -1,11 +1,19 @@
-# TODO: Refactor this model to use an internal Game Model instead
-# of containing the game logic directly.
 class window.App extends Backbone.Model
   initialize: ->
-    @set 'deck', deck = new Deck()
-    @set 'playerHand', deck.dealPlayer()
-    @set 'dealerHand', deck.dealDealer()
+    @set 'deck', new Deck()
+    @newGame()
 
+  endGame: (winner)->
+    console.log winner
+    @trigger "endGame"
+
+  newGame: ->
+    if @get('deck').length < 8
+      @set 'deck', new Deck()
+
+    @set 'playerHand', @get('deck').dealPlayer()
+    @set 'dealerHand', @get('deck').dealDealer()
+    @trigger "newGame"
 
     @get('playerHand').on 'hit', =>
       if @get('playerHand').scores() > 21
@@ -28,10 +36,3 @@ class window.App extends Backbone.Model
         @endGame "The player has more points!"
       else
         @endGame "The player and dealer have the same amount of points!  Push!"
-
-
-  endGame: (winner)->
-    @trigger "endGame"
-
-  newGame: ->
-    @trigger "newGame"

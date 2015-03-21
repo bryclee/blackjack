@@ -26,6 +26,7 @@ class window.AppView extends Backbone.View
       @$el.find('.hit-button').css display:'inline'
       @$el.find('.stand-button').css display:'inline'
       @$el.find('.newGame-button').css display:'none'
+      @render()
 
   render: ->
     @$el.children().remove()
