@@ -17,12 +17,10 @@ class window.AppView extends Backbone.View
     @render()
     #listen for endgame event
     @model.on 'endGame', =>
-      console.log 'endGame log'
       @$el.find('.hit-button').css display:'none'
       @$el.find('.stand-button').css display:'none'
       @$el.find('.newGame-button').css display:'inline'
     @model.on 'newGame', =>
-      console.log 'newGame log'
       @$el.find('.hit-button').css display:'inline'
       @$el.find('.stand-button').css display:'inline'
       @$el.find('.newGame-button').css display:'none'
