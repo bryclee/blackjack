@@ -10,6 +10,7 @@ class window.Hand extends Backbone.Collection
   hit: ->
     @add(@deck.pop())
     @trigger 'hit'
+    @last()
 
   #stand tells game that this hand is standing
   stand: ->

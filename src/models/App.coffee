@@ -4,20 +4,23 @@ class window.App extends Backbone.Model
     @newGame()
 
   endGame: (winner)->
-    console.log winner
+    alert winner
     @trigger "endGame"
 
   newGame: ->
     if @get('deck').length < 8
+      alert 'Shuffling deck!'
       @set 'deck', new Deck()
 
     @set 'playerHand', @get('deck').dealPlayer()
     @set 'dealerHand', @get('deck').dealDealer()
     @trigger "newGame"
 
+
     @get('playerHand').on 'hit', =>
       if @get('playerHand').scores() > 21
         @endGame "The player has busted!"
+
 
     @get('playerHand').on 'stand', =>
 
